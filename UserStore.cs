@@ -41,7 +41,10 @@ namespace MongoDB.AspNet.Identity
     /// <typeparam name="TUserLogin">The type of the t user login.</typeparam>
     /// <typeparam name="TUserRole">The type of the t user role.</typeparam>
     /// <typeparam name="TUserClaim">The type of the t user claim.</typeparam>
-    public class UserStore<TUser, TRole, TKey, TUserLogin, TUserRole, TUserClaim> : IUserLoginStore<TUser, TKey>, IUserClaimStore<TUser, TKey>, IUserRoleStore<TUser, TKey>, IUserPasswordStore<TUser, TKey>, IUserSecurityStampStore<TUser, TKey>, IQueryableUserStore<TUser, TKey>, IUserEmailStore<TUser, TKey>, IUserPhoneNumberStore<TUser, TKey>, IUserTwoFactorStore<TUser, TKey>, IUserStore<TUser, TKey>, IDisposable
+    public class UserStore<TUser, TRole, TKey, TUserLogin, TUserRole, TUserClaim> : 
+        IUserLoginStore<TUser, TKey>, IUserClaimStore<TUser, TKey>, IUserRoleStore<TUser, TKey>, 
+        IUserPasswordStore<TUser, TKey>, IUserSecurityStampStore<TUser, TKey>, IQueryableUserStore<TUser, TKey>, IUserLockoutStore<TUser, TKey>, 
+    IUserEmailStore<TUser, TKey>, IUserPhoneNumberStore<TUser, TKey>, IUserTwoFactorStore<TUser, TKey>, IUserStore<TUser, TKey>, IDisposable
         where TUser : IdentityUser<TKey, TUserLogin, TUserRole, TUserClaim>
         where TRole : IdentityRole<TKey, TUserRole>
         where TKey : IEquatable<TKey>
@@ -646,6 +649,41 @@ namespace MongoDB.AspNet.Identity
                 throw new ArgumentNullException("user");
             }
             return Task.FromResult<bool>(user.TwoFactorEnabled);
+        }
+
+        public Task<DateTimeOffset> GetLockoutEndDateAsync(TUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetLockoutEndDateAsync(TUser user, DateTimeOffset lockoutEnd)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> IncrementAccessFailedCountAsync(TUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task ResetAccessFailedCountAsync(TUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> GetAccessFailedCountAsync(TUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> GetLockoutEnabledAsync(TUser user)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task SetLockoutEnabledAsync(TUser user, bool enabled)
+        {
+            throw new NotImplementedException();
         }
     }
 }
